@@ -23,8 +23,7 @@ namespace Drones
         public int Y { get { return _y; } }
         public int Direction { get => _direction; set => _direction = value; }
 
-        // Cette méthode calcule le nouvel sétat dans lequel le drone se trouve après
-        // que 'interval' millisecondes se sont écoulées
+        
         public void gauche()
         {
             if (_x > 90)

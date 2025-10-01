@@ -108,7 +108,7 @@ namespace Drones
         private void Update(int interval)
         {
             player.addvie();
-            if (Obstacle.NbObstcle(fields) < 15)
+            if (Obstacle.NbObstcle(fields) < 10)
             {
                 fields.Add(new Obstacle(RandomHelper.NbrRandom(0, WIDTH-70, false), RandomHelper.NbrRandom(300, 800, true)));
                 

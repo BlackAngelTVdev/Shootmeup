@@ -17,7 +17,6 @@ namespace Drones.Helpers
                 return r.Next(middleMin, middleMax + 1);
             }
 
-
             return r.Next(nbrMin, nbrMax + 1);
         }
 
