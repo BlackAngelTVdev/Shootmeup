@@ -105,7 +105,10 @@ namespace Drones
             if (Obstacle.NbObstcle(fields) < 15)
             {
                 fields.Add(new Obstacle(RandomHelper.NbrRandom(0, WIDTH, false), RandomHelper.NbrRandom(300, 800, true)));
-                military.Add(new ennemi(RandomHelper.NbrRandom(0, WIDTH, false), 20, RandomHelper.NbrRandom(1,2, true)));
+                
+            }
+            if (ennemi.Nbennemi(military) < 10) {
+                military.Add(new ennemi(RandomHelper.NbrRandom(0, WIDTH, false), 20, RandomHelper.NbrRandom(1, 2, true)));
             }
             foreach (Prjectil prjectil in pulls)
             {
@@ -113,7 +116,7 @@ namespace Drones
             }
             foreach (ennemi ennemi in military)
             {
-                ennemi.Update(player.X,player.Y);
+                ennemi.Update(player.X,player.Y, pulls);
             }
             
 
