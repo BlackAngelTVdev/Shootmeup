@@ -37,6 +37,7 @@ namespace Drones
         {
             InitializeComponent();
             this.MouseMove += AirSpace_MouseMove;  // Changer le nom pour éviter conflit
+            this.MouseClick += AirSpace_MouseClick;
 
             this.KeyPreview = true;
             this.KeyDown += AirSpace_KeyDown;
@@ -52,6 +53,14 @@ namespace Drones
         {
             mousePosition = e.Location;
         }
+        private void AirSpace_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+            if (e.Button == MouseButtons.Left)
+            {
+                player.tire(pulls, mousePosition);
+            }
+        }
 
         private void AirSpace_KeyDown(object sender, KeyEventArgs e)
         {
@@ -66,10 +75,7 @@ namespace Drones
                     
                     player.droit();
                     break;
-                case Keys.Space:
-                    player.tire(pulls, mousePosition);
-                    
-                    break;
+                
             }
         }
 
@@ -104,7 +110,7 @@ namespace Drones
             player.addvie();
             if (Obstacle.NbObstcle(fields) < 15)
             {
-                fields.Add(new Obstacle(RandomHelper.NbrRandom(0, WIDTH, false), RandomHelper.NbrRandom(300, 800, true)));
+                fields.Add(new Obstacle(RandomHelper.NbrRandom(0, WIDTH-70, false), RandomHelper.NbrRandom(300, 800, true)));
                 
             }
             if (ennemi.Nbennemi(military) < 10) {

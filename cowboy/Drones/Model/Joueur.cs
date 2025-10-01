@@ -36,9 +36,7 @@ namespace Drones
                     _x += 100;
                     _direction = -100;
                 }
-
             }
-
         }
         public void droit()
         {
@@ -51,7 +49,6 @@ namespace Drones
                     _direction = 100;
                 }
             }
-
         }
         public void addvie()
         {
@@ -65,13 +62,12 @@ namespace Drones
                     _vie++;
                 }
             }
-
         }
         public void tire(List<Prjectil> pulls, Point targetPosition)
         {
             DateTime now = DateTime.Now;
 
-            if ((now - lastTireCall).TotalSeconds >= 0.00001)
+            if ((now - lastTireCall).TotalSeconds >= 0.33)
             {
                 Image img = Image.FromFile(@"D:\Poo\P_oo-Shoot-me-up\cowboy\Drones\Resources\cactus.png");
 
