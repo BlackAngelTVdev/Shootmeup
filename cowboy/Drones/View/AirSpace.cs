@@ -18,10 +18,12 @@ namespace Drones
 
 
 
+
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
 
         private List<Obstacle> fields;
         private List<Prjectil> pulls;
+        private List<ennemi> military;
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
@@ -31,7 +33,7 @@ namespace Drones
 
 
         // Initialisation de l'espace aérien avec un certain nombre de drones
-        public AirSpace(List<Obstacle> fields, List<Prjectil> pulls)
+        public AirSpace(List<Obstacle> fields, List<Prjectil> pulls, List<ennemi> military)
         {
             InitializeComponent();
             this.MouseMove += AirSpace_MouseMove;  // Changer le nom pour éviter conflit
@@ -44,6 +46,7 @@ namespace Drones
             this.fields = fields;
             this.pulls = pulls;
             player = new Player();
+            this.military = military;
         }
         private void AirSpace_MouseMove(object sender, MouseEventArgs e)
         {
@@ -65,6 +68,7 @@ namespace Drones
                     break;
                 case Keys.Space:
                     player.tire(pulls, mousePosition);
+                    
                     break;
             }
         }
@@ -85,6 +89,10 @@ namespace Drones
             {
                 prjectil.Render(airspace);
             }
+            foreach (ennemi ennemi in military)
+            {
+                ennemi.Render(airspace);
+            }
 
             airspace.Render();
 
@@ -97,10 +105,15 @@ namespace Drones
             if (Obstacle.NbObstcle(fields) < 15)
             {
                 fields.Add(new Obstacle(RandomHelper.NbrRandom(0, WIDTH, false), RandomHelper.NbrRandom(300, 800, true)));
+                military.Add(new ennemi(RandomHelper.NbrRandom(0, WIDTH, false), 20, RandomHelper.NbrRandom(1,2, true)));
             }
             foreach (Prjectil prjectil in pulls)
             {
                 prjectil.Update();
+            }
+            foreach (ennemi ennemi in military)
+            {
+                ennemi.Update(player.X,player.Y);
             }
             
 

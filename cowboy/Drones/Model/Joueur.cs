@@ -76,7 +76,7 @@ namespace Drones
                 Image img = Image.FromFile(@"D:\Poo\P_oo-Shoot-me-up\cowboy\Drones\Resources\cactus.png");
 
                 
-                pulls.Add(new Prjectil(this.X, this.Y, img,50, targetPosition.X, targetPosition.Y));
+                pulls.Add(new Prjectil(this.X, this.Y, img,50, targetPosition.X, targetPosition.Y, false));
 
                 lastTireCall = now;
             }

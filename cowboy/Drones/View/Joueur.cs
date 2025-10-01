@@ -9,7 +9,7 @@ namespace Drones
 
     public partial class Player
     {
-        private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
+        //private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
         private Image joueur = Image.FromFile(@"D:\Poo\P_oo-Shoot-me-up\cowboy\Drones\Resources\cowboy.png");
 
         // De manière graphique

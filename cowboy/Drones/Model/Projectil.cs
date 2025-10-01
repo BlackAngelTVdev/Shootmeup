@@ -8,7 +8,8 @@ namespace Drones
     {
         private double realX;
         private double realY;
-
+        private bool ennemi;
+        
         public int X { get { return (int)realX; } }
         public int Y { get { return (int)realY; } }
 
@@ -21,12 +22,13 @@ namespace Drones
         private double vx;
         private double vy;
 
-        public Prjectil(int xInitial, int yInitial, Image texture, float speed, float targetX, float targetY)
+        public Prjectil(int xInitial, int yInitial, Image texture, float speed, float targetX, float targetY, bool ennemi)
         {
             realX = xInitial;
             realY = yInitial;
             Texture = texture;
             Speed = speed;
+            this.ennemi = ennemi;
 
             double dx = targetX - realX;
             double dy = targetY - realY;

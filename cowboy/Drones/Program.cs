@@ -18,15 +18,17 @@ namespace Drones
             
             List<Obstacle> fields = new List<Obstacle>();
             List<Prjectil> pulls = new List<Prjectil> ();
+            List<ennemi> military = new List<ennemi> ();
 
 
 
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             try
             {
-                Application.Run(new AirSpace(fields, pulls)); // passe ta liste de drones ici
+                Application.Run(new AirSpace(fields, pulls ,military)); // passe ta liste de drones ici
             }
             catch (Exception ex)
             {
