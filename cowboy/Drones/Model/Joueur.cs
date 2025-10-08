@@ -12,18 +12,19 @@ namespace Drones
         private int _y = AirSpace.HEIGHT - 200;
         private int _direction = 100;
         private int _cooldownPV = 0;
-        private DateTime lastTireCall = DateTime.MinValue;
+        private DateTime _lastTireCall = DateTime.MinValue;
 
         // Constructeur
+        
+        public int X { get { return _x; } private set { _x = value; } }
+        public int Y { get { return _y; } }
+        public int Direction { get => _direction; set => _direction = value; }
+        public int Vie { get => _vie; set => _vie = value; }
+
         public Player()
         {
             _x = AirSpace.WIDTH / 2;
         }
-        public int X { get { return _x; } private set { _x = value; } }
-        public int Y { get { return _y; } }
-        public int Direction { get => _direction; set => _direction = value; }
-
-        
         public void gauche()
         {
             if (_x > 90)
@@ -66,15 +67,19 @@ namespace Drones
         {
             DateTime now = DateTime.Now;
 
-            if ((now - lastTireCall).TotalSeconds >= 0.33)
+            if ((now - _lastTireCall).TotalSeconds >= 0.33)
             {
-                Image img = Image.FromFile(@"D:\Poo\P_oo-Shoot-me-up\cowboy\Drones\Resources\cactus.png");
+                Image img = Image.FromFile(@"C:\Users\pb17shq\Documents\Shootmeup\cowboy\Drones\Resources\cactus.png");
 
                 
                 pulls.Add(new Prjectil(this.X, this.Y, img,50, targetPosition.X, targetPosition.Y, false));
 
-                lastTireCall = now;
+                _lastTireCall = now;
             }
+        }
+        public Rectangle GetRectangle()
+        {
+            return new Rectangle(X, Y, 50, 50); // Ajuste selon la taille visible du joueur
         }
 
 

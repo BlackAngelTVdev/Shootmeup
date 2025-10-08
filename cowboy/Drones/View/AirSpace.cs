@@ -11,9 +11,10 @@ namespace Drones
     {
         public static readonly int WIDTH = 1920;        // Dimensions of the airspace
         public static readonly int HEIGHT = 1080;
-        private Image backgroundImage = Image.FromFile(@"D:\Poo\P_oo-Shoot-me-up\cowboy\Drones\Resources\background1.png");
-        private Player player;
-        private Point mousePosition;
+        private Image _backgroundImage = Image.FromFile(@"C:\Users\pb17shq\Documents\Shootmeup\cowboy\Drones\Resources\background1.png");
+        private Player _player;
+        
+        private Point _mousePosition;
 
 
 
@@ -21,13 +22,13 @@ namespace Drones
 
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
 
-        private List<Obstacle> fields;
-        private List<Prjectil> pulls;
-        private List<ennemi> military;
+        private List<Obstacle> _fields;
+        private List<Prjectil> _pulls;
+        private List<ennemi> _military;
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
-
+        
 
 
 
@@ -44,21 +45,22 @@ namespace Drones
 
             currentContext = BufferedGraphicsManager.Current;
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
-            this.fields = fields;
-            this.pulls = pulls;
-            player = new Player();
-            this.military = military;
+            this._fields = fields;
+            this._pulls = pulls;
+            
+            this._military = military;
+            _player = new Player();
         }
         private void AirSpace_MouseMove(object sender, MouseEventArgs e)
         {
-            mousePosition = e.Location;
+            _mousePosition = e.Location;
         }
         private void AirSpace_MouseClick(object sender, MouseEventArgs e)
         {
             
             if (e.Button == MouseButtons.Left)
             {
-                player.tire(pulls, mousePosition);
+                _player.tire(_pulls, _mousePosition);
             }
         }
 
@@ -67,15 +69,11 @@ namespace Drones
             switch (e.KeyCode)
             {
                 case Keys.A:
-
-                    player.gauche();
+                    _player.gauche();
                     break;
-
                 case Keys.D:
-                    
-                    player.droit();
+                    _player.droit();
                     break;
-                
             }
         }
 
@@ -83,19 +81,19 @@ namespace Drones
         // Affichage de la situation actuelle
         private void Render()
         {
-            airspace.Graphics.DrawImage(backgroundImage, new Rectangle(0, 0, Width, Height));
-            player.Render(airspace);
-            
-           
-            foreach (Obstacle obstacle in fields)
+            airspace.Graphics.DrawImage(_backgroundImage, new Rectangle(0, 0, Width, Height));
+            _player.Render(airspace);
+
+
+            foreach (Obstacle obstacle in _fields)
             {
                 obstacle.Render(airspace);
             }
-            foreach (Prjectil prjectil in pulls)
+            foreach (Prjectil prjectil in _pulls)
             {
                 prjectil.Render(airspace);
             }
-            foreach (ennemi ennemi in military)
+            foreach (ennemi ennemi in _military)
             {
                 ennemi.Render(airspace);
             }
@@ -107,26 +105,104 @@ namespace Drones
         // Calcul du nouvel état après que 'interval' millisecondes se sont écoulées
         private void Update(int interval)
         {
-            player.addvie();
-            if (Obstacle.NbObstcle(fields) < 10)
+            _player.addvie();
+
+            if (Obstacle.NbObstacle(_fields) < 10)
             {
-                fields.Add(new Obstacle(RandomHelper.NbrRandom(0, WIDTH-70, false), RandomHelper.NbrRandom(300, 800, true)));
+                _fields.Add(new Obstacle(RandomHelper.NbrRandom(0, WIDTH - 70, false), RandomHelper.NbrRandom(300, 800, true)));
+            }
+            if (ennemi.Nbennemi(_military) < 10)
+            {
+                _military.Add(new ennemi(RandomHelper.NbrRandom(0, WIDTH, false), 20, RandomHelper.NbrRandom(1, 2, true)));
+            }
+
+            // Mise à jour des projectiles
+            foreach (Prjectil projectil in _pulls)
+            {
+                projectil.Update();
+            }
+
+            // Mise à jour des ennemis
+            foreach (ennemi ennemi in _military)
+            {
+                ennemi.Update(_player.X, _player.Y, _pulls);
+            }
+
+            List<Prjectil> projectilesToRemove = new List<Prjectil>();
+            List<Obstacle> obstaclesToRemove = new List<Obstacle>();
+            List<ennemi> ennemisToRemove = new List<ennemi>();
+
+            foreach (var projectile in _pulls)
+            {
                 
-            }
-            if (ennemi.Nbennemi(military) < 10) {
-                military.Add(new ennemi(RandomHelper.NbrRandom(0, WIDTH, false), 20, RandomHelper.NbrRandom(1, 2, true)));
-            }
-            foreach (Prjectil prjectil in pulls)
-            {
-                prjectil.Update();
-            }
-            foreach (ennemi ennemi in military)
-            {
-                ennemi.Update(player.X,player.Y, pulls);
+
+                Rectangle projRect = projectile.GetRectangle();
+
+                bool handled = false;
+
+                
+                foreach (var obstacle in _fields)
+                {
+                    if (projRect.IntersectsWith(obstacle.GetRectangle()))
+                    {
+                        obstacle.Vie--;
+                        projectilesToRemove.Add(projectile);
+
+                        if (obstacle.Vie <= 0)
+                            obstaclesToRemove.Add(obstacle);
+
+                        handled = true;
+                        break;
+                    }
+                }
+                if (handled) continue;
+
+                if (!projectile.Ennemi)
+                {
+                    
+                    foreach (var enemy in _military)
+                    {
+                        if (projRect.IntersectsWith(enemy.GetRectangle()))
+                        {
+                            enemy.Vie--;
+                            projectilesToRemove.Add(projectile);
+
+                            if (enemy.Vie <= 0)
+                                ennemisToRemove.Add(enemy);
+
+                            handled = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    
+                    Rectangle playerRect = _player.GetRectangle();  
+                    if (projRect.IntersectsWith(playerRect))
+                    {
+                        _player.Vie-=10;
+                        projectilesToRemove.Add(projectile);
+                        handled = true;
+                    }
+                }
             }
             
+            // Suppression après boucle
+            foreach (var p in projectilesToRemove)
+                _pulls.Remove(p);
+
+            foreach (var o in obstaclesToRemove)
+                _fields.Remove(o);
+
+            foreach (var e in ennemisToRemove)
+                _military.Remove(e);
+
+
+
 
         }
+
 
         // Méthode appelée à chaque frame
         private void NewFrame(object sender, EventArgs e)

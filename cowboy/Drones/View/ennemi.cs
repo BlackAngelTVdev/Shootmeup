@@ -12,12 +12,12 @@ namespace Drones
         
         
             //private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
-            private Image kangourou = Image.FromFile(@"D:\Poo\P_oo-Shoot-me-up\cowboy\Drones\Resources\kangaroo.png");
+            private Image kangourou = Image.FromFile(@"C:\Users\pb17shq\Documents\Shootmeup\cowboy\Drones\Resources\kangaroo.png");
 
             // De manière graphique
             public void Render(BufferedGraphics drawingSpace)
             {
-                drawingSpace.Graphics.DrawImage(kangourou, new Rectangle(x, y, 100, 100));
+                drawingSpace.Graphics.DrawImage(kangourou, new Rectangle(_x, _y, 100, 100));
                
             }
 
