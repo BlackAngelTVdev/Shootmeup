@@ -146,6 +146,19 @@ namespace CowBoy
             List<Obstacle> obstaclesToRemove = new List<Obstacle>();
             List<ennemi> ennemisToRemove = new List<ennemi>();
 
+            // Vérification des collisions physiques entre ennemis et joueur
+            Rectangle playerRect = _player.GetRectangle();
+
+            foreach (var enemy in _military)
+            {
+                if (enemy.GetRectangle().IntersectsWith(playerRect))
+                {
+                    _player.Vie -= 15;        // Le joueur perd 15 PV
+                    ennemisToRemove.Add(enemy);  // L'ennemi disparaît
+                }
+            }
+
+
             foreach (var projectile in _pulls)
             {
                 
@@ -190,11 +203,11 @@ namespace CowBoy
                             break;
                         }
                     }
-                }
+                } 
                 else
                 {
                     
-                    Rectangle playerRect = _player.GetRectangle();  
+                    
                     if (projRect.IntersectsWith(playerRect))
                     {
                         _player.Vie-=10;
@@ -213,9 +226,6 @@ namespace CowBoy
 
             foreach (var e in ennemisToRemove)
                 _military.Remove(e);
-
-
-
 
         }
 
