@@ -29,18 +29,19 @@ namespace CowBoy
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
 
         private List<Obstacle> _fields;
-        private List<Prjectil> _pulls;
+        private List<Projectil> _pulls;
         private List<ennemi> _military;
 
         BufferedGraphicsContext currentContext;
-        BufferedGraphics airspace;
-        
+        BufferedGraphics airspace; 
+        private int playerShotsCount = 0;
+
 
 
 
 
         // Initialisation de l'espace aérien avec un certain nombre de drones
-        public Sand(List<Obstacle> fields, List<Prjectil> pulls, List<ennemi> military)
+        public Sand(List<Obstacle> fields, List<Projectil> pulls, List<ennemi> military)
         {
             
             InitializeComponent();
@@ -70,6 +71,7 @@ namespace CowBoy
             if (e.Button == MouseButtons.Left)
             {
                 _player.tire(_pulls, _mousePosition);
+                playerShotsCount++;
             }
         }
 
@@ -90,6 +92,7 @@ namespace CowBoy
         // Affichage de la situation actuelle
         private void Render()
         {
+            Console.WriteLine(playerShotsCount);
             score s = new score();
             airspace.Graphics.DrawImage(_backgroundImage, new Rectangle(0, 0, Width, Height));
             _player.Render(airspace);
@@ -99,7 +102,7 @@ namespace CowBoy
             {
                 obstacle.Render(airspace);
             }
-            foreach (Prjectil prjectil in _pulls)
+            foreach (Projectil prjectil in _pulls)
             {
                 prjectil.Render(airspace);
             }
@@ -117,6 +120,7 @@ namespace CowBoy
         // Calcul du nouvel état après que 'interval' millisecondes se sont écoulées
         private void Update(int interval)
         {
+            
             score s = new score();
 
             _player.addvie();
@@ -131,7 +135,7 @@ namespace CowBoy
             }
 
             // Mise à jour des projectiles
-            foreach (Prjectil projectil in _pulls)
+            foreach (Projectil projectil in _pulls)
             {
                 projectil.Update();
             }
@@ -142,7 +146,7 @@ namespace CowBoy
                 ennemi.Update(_player.X, _player.Y, _pulls);
             }
 
-            List<Prjectil> projectilesToRemove = new List<Prjectil>();
+            List<Projectil> projectilesToRemove = new List<Projectil>();
             List<Obstacle> obstaclesToRemove = new List<Obstacle>();
             List<ennemi> ennemisToRemove = new List<ennemi>();
 
@@ -153,7 +157,7 @@ namespace CowBoy
             {
                 if (enemy.GetRectangle().IntersectsWith(playerRect))
                 {
-                    _player.Vie -= 15;        // Le joueur perd 15 PV
+                    _player.Vie -= 10;        // Le joueur perd 15 PV
                     ennemisToRemove.Add(enemy);  // L'ennemi disparaît
                 }
             }
@@ -183,34 +187,40 @@ namespace CowBoy
                     }
                 }
                 if (handled) continue;
-
                 if (!projectile.Ennemi)
                 {
-                    
                     foreach (var enemy in _military)
                     {
                         if (projRect.IntersectsWith(enemy.GetRectangle()))
                         {
-                            enemy.Vie--;
+                            // Tous les 10 tirs : dégâts réduits à 3
+                            if (playerShotsCount % 10 == 0)
+                            {
+                                enemy.Vie -= 3;
+                            }
+                            else
+                            {
+                                enemy.Vie--;
+                            }
                             projectilesToRemove.Add(projectile);
 
                             if (enemy.Vie <= 0)
-                            {    
-                                score.add(); // incrémente _score
+                            {
+                                score.add();
                                 ennemisToRemove.Add(enemy);
                             }
                             handled = true;
                             break;
                         }
                     }
-                } 
+                }
                 else
                 {
                     
                     
                     if (projRect.IntersectsWith(playerRect))
                     {
-                        _player.Vie-=10;
+                        _player.Vie-=5;
                         projectilesToRemove.Add(projectile);
                         handled = true;
                     }

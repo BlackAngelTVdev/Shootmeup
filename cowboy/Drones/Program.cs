@@ -17,7 +17,7 @@ namespace CowBoy
             // Création de la flotte de drones
             
             List<Obstacle> fields = new List<Obstacle>();
-            List<Prjectil> pulls = new List<Prjectil> ();
+            List<Projectil> pulls = new List<Projectil> ();
             List<ennemi> military = new List<ennemi> ();
 
 

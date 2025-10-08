@@ -4,7 +4,7 @@ using System.Drawing;  // Pour Image
 
 namespace CowBoy
 {
-    public partial class Prjectil
+    public partial class Projectil
     {
         private static int _nextId = 1; 
 
@@ -29,7 +29,7 @@ namespace CowBoy
         public float TargetY { get; private set; }
         public bool Ennemi { get => _ennemi; set => _ennemi = value; }
 
-        public Prjectil(int xInitial, int yInitial, Image texture, float speed, float targetX, float targetY, bool ennemi)
+        public Projectil(int xInitial, int yInitial, Image texture, float speed, float targetX, float targetY, bool ennemi)
         {
             Id = _nextId++;  // attribution auto d'un ID unique incrémental
 

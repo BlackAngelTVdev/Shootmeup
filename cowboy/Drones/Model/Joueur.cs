@@ -63,7 +63,7 @@ namespace CowBoy
                 }
             }
         }
-        public void tire(List<Prjectil> pulls, Point targetPosition)
+        public void tire(List<Projectil> pulls, Point targetPosition)
         {
             DateTime now = DateTime.Now;
 
@@ -72,7 +72,7 @@ namespace CowBoy
                 
 
                 
-                pulls.Add(new Prjectil(this.X, this.Y, Resources.cactus,50, targetPosition.X, targetPosition.Y, false));
+                pulls.Add(new Projectil(this.X, this.Y, Resources.cactus,50, targetPosition.X, targetPosition.Y, false));
 
                 _lastTireCall = now;
             }

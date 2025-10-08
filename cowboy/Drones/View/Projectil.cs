@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CowBoy
 {
-    public partial class Prjectil
+    public partial class Projectil
     {
         public void Render(BufferedGraphics drawingSpace)
         {

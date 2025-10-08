@@ -19,6 +19,7 @@ namespace CowBoy
             public void Render(BufferedGraphics drawingSpace)
             {
                 drawingSpace.Graphics.DrawImage(kangourou, new Rectangle(_x, _y, 100, 100));
+
                
             }
 
