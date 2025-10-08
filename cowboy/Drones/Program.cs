@@ -1,6 +1,6 @@
-using Drones;
+using CowBoy;
 
-namespace Drones
+namespace CowBoy
 {
     internal static class Program
     {
@@ -28,7 +28,7 @@ namespace Drones
 
             try
             {
-                Application.Run(new AirSpace(fields, pulls ,military)); // passe ta liste de drones ici
+                Application.Run(new Sand(fields, pulls ,military)); // passe ta liste de drones ici
             }
             catch (Exception ex)
             {

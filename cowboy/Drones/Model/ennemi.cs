@@ -1,8 +1,8 @@
-﻿using Drones.Helpers;
-using Drones.Properties;
+﻿using CowBoy.Helpers;
+using CowBoy.Properties;
 using System;
 
-namespace Drones
+namespace CowBoy
 {
     public partial class ennemi
     {

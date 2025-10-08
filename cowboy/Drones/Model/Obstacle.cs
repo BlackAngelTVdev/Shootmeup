@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing; // Pour Rectangle
 
-namespace Drones
+namespace CowBoy
 {
     public partial class Obstacle
     {

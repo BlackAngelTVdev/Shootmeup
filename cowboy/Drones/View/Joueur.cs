@@ -1,9 +1,9 @@
-﻿using Drones.Helpers;
-using Drones.Properties;
+﻿using CowBoy.Helpers;
+using CowBoy.Properties;
 using System.Resources;
 using System.Xml.Linq;
 
-namespace Drones
+namespace CowBoy
 {
     // Cette partie de la classe Drone définit comment on peut voir un drone
 

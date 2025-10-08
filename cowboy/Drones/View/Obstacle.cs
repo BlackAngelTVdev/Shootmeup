@@ -1,12 +1,12 @@
-﻿using Drones.Helpers;
-using Drones.Properties;
+﻿using CowBoy.Helpers;
+using CowBoy.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drones
+namespace CowBoy
 {
     public partial class Obstacle
     {

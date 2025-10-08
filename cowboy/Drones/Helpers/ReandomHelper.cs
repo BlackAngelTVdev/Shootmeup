@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Drones.Helpers
+namespace CowBoy.Helpers
 {
     internal class RandomHelper
     {

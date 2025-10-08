@@ -1,8 +1,8 @@
-﻿using Drones.Helpers;
+﻿using CowBoy.Helpers;
 using System;
 using System.Drawing;  // Pour Image
 
-namespace Drones
+namespace CowBoy
 {
     public partial class Prjectil
     {

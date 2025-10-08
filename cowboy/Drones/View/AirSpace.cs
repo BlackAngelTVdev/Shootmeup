@@ -1,13 +1,13 @@
-﻿using Drones;
-using Drones.Helpers;
+﻿using CowBoy;
+using CowBoy.Helpers;
 
-namespace Drones
+namespace CowBoy
 {
     // La classe AirSpace représente le territoire au dessus duquel les drones peuvent voler
     // Il s'agit d'un formulaire (une fenêtre) qui montre une vue 2D depuis en dessus
     // Il n'y a donc pas de notion d'altitude qui intervient
 
-    public partial class AirSpace : Form
+    public partial class Sand : Form
     {
         public static readonly int WIDTH = 1920;        // Dimensions of the airspace
         public static readonly int HEIGHT = 1080;
@@ -34,7 +34,7 @@ namespace Drones
 
 
         // Initialisation de l'espace aérien avec un certain nombre de drones
-        public AirSpace(List<Obstacle> fields, List<Prjectil> pulls, List<ennemi> military)
+        public Sand(List<Obstacle> fields, List<Prjectil> pulls, List<ennemi> military)
         {
             InitializeComponent();
             this.MouseMove += AirSpace_MouseMove;  // Changer le nom pour éviter conflit
