@@ -1,5 +1,8 @@
 ﻿using CowBoy;
+using CowBoy;
 using CowBoy.Helpers;
+using CowBoy.Properties;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace CowBoy
 {
@@ -9,14 +12,17 @@ namespace CowBoy
 
     public partial class Sand : Form
     {
+
+        
         public static readonly int WIDTH = 1920;        // Dimensions of the airspace
         public static readonly int HEIGHT = 1080;
-        private Image _backgroundImage = Image.FromFile(@"C:\Users\pb17shq\Documents\Shootmeup\cowboy\Drones\Resources\background1.png");
+        private Image _backgroundImage = Resources.bk;
         private Player _player;
         
         private Point _mousePosition;
 
 
+        
 
 
 
@@ -36,6 +42,7 @@ namespace CowBoy
         // Initialisation de l'espace aérien avec un certain nombre de drones
         public Sand(List<Obstacle> fields, List<Prjectil> pulls, List<ennemi> military)
         {
+            
             InitializeComponent();
             this.MouseMove += AirSpace_MouseMove;  // Changer le nom pour éviter conflit
             this.MouseClick += AirSpace_MouseClick;
@@ -50,6 +57,8 @@ namespace CowBoy
             
             this._military = military;
             _player = new Player();
+            
+
         }
         private void AirSpace_MouseMove(object sender, MouseEventArgs e)
         {
@@ -81,6 +90,7 @@ namespace CowBoy
         // Affichage de la situation actuelle
         private void Render()
         {
+            score s = new score();
             airspace.Graphics.DrawImage(_backgroundImage, new Rectangle(0, 0, Width, Height));
             _player.Render(airspace);
 
@@ -97,14 +107,18 @@ namespace CowBoy
             {
                 ennemi.Render(airspace);
             }
+            s.Render(airspace);
 
             airspace.Render();
+            
 
         }
 
         // Calcul du nouvel état après que 'interval' millisecondes se sont écoulées
         private void Update(int interval)
         {
+            score s = new score();
+
             _player.addvie();
 
             if (Obstacle.NbObstacle(_fields) < 10)
@@ -168,8 +182,10 @@ namespace CowBoy
                             projectilesToRemove.Add(projectile);
 
                             if (enemy.Vie <= 0)
+                            {    
+                                score.add(); // incrémente _score
                                 ennemisToRemove.Add(enemy);
-
+                            }
                             handled = true;
                             break;
                         }
