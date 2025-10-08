@@ -20,7 +20,6 @@ out/
 *.pch
 
 # Auto-generated files
-*.Designer.cs
 *.g.cs
 *.g.i.cs
 
