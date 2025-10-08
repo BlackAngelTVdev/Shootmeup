@@ -1,4 +1,5 @@
 ﻿using Drones.Helpers;
+using Drones.Properties;
 using System;
 
 namespace Drones
@@ -34,7 +35,7 @@ namespace Drones
                 _y += Math.Sign(dy) * Math.Min(_speed, Math.Abs(dy));
             if (RandomHelper.NbrRandom(0,200, false) == 5)
             {
-                Image img = Image.FromFile(@"C:\Users\pb17shq\Documents\Shootmeup\cowboy\Drones\Resources\gantboxe.png");
+                Image img = Resources.gant;
 
                 // 1. Calcul de l’angle en radians
                 double dx1 = targetX - this._x;

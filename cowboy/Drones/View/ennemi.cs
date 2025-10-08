@@ -1,4 +1,5 @@
 ﻿using Drones.Helpers;
+using Drones.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Drones
         
         
             //private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
-            private Image kangourou = Image.FromFile(@"C:\Users\pb17shq\Documents\Shootmeup\cowboy\Drones\Resources\kangaroo.png");
+            private Image kangourou = Resources.kangou;
 
             // De manière graphique
             public void Render(BufferedGraphics drawingSpace)

@@ -69,10 +69,10 @@ namespace Drones
 
             if ((now - _lastTireCall).TotalSeconds >= 0.33)
             {
-                Image img = Image.FromFile(@"C:\Users\pb17shq\Documents\Shootmeup\cowboy\Drones\Resources\cactus.png");
+                
 
                 
-                pulls.Add(new Prjectil(this.X, this.Y, img,50, targetPosition.X, targetPosition.Y, false));
+                pulls.Add(new Prjectil(this.X, this.Y, Resources.cactus,50, targetPosition.X, targetPosition.Y, false));
 
                 _lastTireCall = now;
             }
