@@ -5,44 +5,50 @@ namespace Drones
 {
     public partial class ennemi
     {
-        public int x;
-        public int y;
-        public int speed = 5;
+        private int _x;
+        private int _y;
+        private int _speed = 5;
+        private int _vie = 3;
+
+        public int X { get => _x; set => _x = value; }
+        public int Y { get => _y; set => _y = value; }
+        public int Speed { get => _speed; set => _speed = value; }
+        public int Vie { get => _vie; set => _vie = value; }
 
         public ennemi(int startX, int startY, int speed)
         {
-            this.x = startX;
-            this.y = startY;
-            this.speed = speed;
+            this._x = startX;
+            this._y = startY;
+            this._speed = speed;
         }
 
         // Update prend la cible actuelle en paramètre
         public void Update(int targetX, int targetY, List<Prjectil> pulls)
         {
-            int dx = targetX - x;
-            int dy = targetY - y;
+            int dx = targetX - _x;
+            int dy = targetY - _y;
 
             if (dx != 0)
-                x += Math.Sign(dx) * Math.Min(speed, Math.Abs(dx));
+                _x += Math.Sign(dx) * Math.Min(_speed, Math.Abs(dx));
             if (dy != 0)
-                y += Math.Sign(dy) * Math.Min(speed, Math.Abs(dy));
-            if (RandomHelper.NbrRandom(0,150, false) == 5)
+                _y += Math.Sign(dy) * Math.Min(_speed, Math.Abs(dy));
+            if (RandomHelper.NbrRandom(0,200, false) == 5)
             {
-                Image img = Image.FromFile(@"D:\Poo\P_oo-Shoot-me-up\cowboy\Drones\Resources\gantboxe1.png");
+                Image img = Image.FromFile(@"C:\Users\pb17shq\Documents\Shootmeup\cowboy\Drones\Resources\gantboxe.png");
 
                 // 1. Calcul de l’angle en radians
-                double dx1 = targetX - this.x;
-                double dy1 = targetY - this.y;
+                double dx1 = targetX - this._x;
+                double dy1 = targetY - this._y;
                 double angleRad = Math.Atan2(dy1, dx1);
 
                 // 2. Conversion en degrés
                 float angleDeg = (float)(angleRad * (180.0 / Math.PI));
 
                 // 3. On crée l’image pivotée
-                Image rotated = RotateImage(img, angleDeg);
+                Image rotatead = RotateImage(img, angleDeg);
 
 
-                pulls.Add(new Prjectil(this.x,this.y, rotated, 20, targetX, targetY, true));
+                pulls.Add(new Prjectil(this._x,this._y + 75, rotatead, 20, targetX, targetY, true));
             }    
         }
 
@@ -74,5 +80,11 @@ namespace Drones
 
             return Nb;
         }
+        public Rectangle GetRectangle()
+        {
+            return new Rectangle(_x, _y, 70, 70); // Ajuste aussi selon la taille visible
+        }
+
+
     }
 }
