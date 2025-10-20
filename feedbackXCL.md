@@ -23,23 +23,23 @@
 
 Les valeurs possibles du résultat sont: LA (Largement Acquis), A (Acquis), I (Insuffisant), NA (non acquis)
 
-| Critère                    | Résultat | Commentaire |
-| -------------------------- | -------- | ----------- |
-| Avancement Obstacles       |          |             |
-| Avancement Joueur          |          |             |
-| Avancement Tirs            |          |             |
-| Avancement ennemis         |          |             |
-| Avancement score           |          |             |
-| Qualité Présentation       |          |             |
-| Qualité Commentaires       |          |             |
-| Qualité Conventions        |          |             |
-| POO                        |          |             |
-| Processus Journal          |          |             |
-| Processus Git              |          |             |
-| Processus Livraison        |          |             |
-| Expression User Stories    |          |             |
-| Expression Rapport Fome    |          |             |
-| Expression Rapport Contenu |          |             |
-| Ecologie (gitignore)       |          |             |
-| Comportement collectif     |          |             |
-| Comportement individuel    |          |             |
+| Critère                    | Résultat | Commentaire                                                                                                                                                                                                             |
+| -------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Avancement Obstacles       | A        |                                                                                                                                                                                                                         |
+| Avancement Joueur          | A        |                                                                                                                                                                                                                         |
+| Avancement Tirs            | A        |                                                                                                                                                                                                                         |
+| Avancement ennemis         | A        |                                                                                                                                                                                                                         |
+| Avancement score           | A        |                                                                                                                                                                                                                         |
+| Qualité Présentation       | I        | L'indentaion n'est pas bonne, dans certains fichiers (enemi.cs par exemple). ctrl-A-K-F                                                                                                                                 |
+| Qualité Commentaires       | A        |                                                                                                                                                                                                                         |
+| Qualité Conventions        | I        | le nom des classes doit toujours commencer par une majuscule                                                                                                                                                            |
+| POO                        | A        |                                                                                                                                                                                                                         |
+| Processus Journal          | A        | attention : certaines entrées sont très mal écrites (pour ses hidebox, par exemple)                                                                                                                                     |
+| Processus Git              | LA       |                                                                                                                                                                                                                         |
+| Processus Livraison        | LA       |                                                                                                                                                                                                                         |
+| Expression User Stories    | NA       | ça ne va pas du tout sur ce plan là. Il n'y a aucune User story dans votre nouveau repo et l'analyse fonctionnelle ne répond pas du tout à la demande. Il n'y a typiquement aucune maquette dans votre document actuel. |
+| Expression Rapport Forme   | A        |                                                                                                                                                                                                                         |
+| Expression Rapport Contenu | I        | faites une distinction claire entre les objectifs du produit et les objectifs pédagogiques.<br> Le de diagramme de classe UML manque                                                                                    |
+| Ecologie (gitignore)       | A        |                                                                                                                                                                                                                         |
+| Comportement collectif     | A        | attention à ne pas perdre de temps dans trop de bavardage avec vos voisins                                                                                                                                              |
+| Comportement individuel    | LA       |                                                                                                                                                                                                                         |
