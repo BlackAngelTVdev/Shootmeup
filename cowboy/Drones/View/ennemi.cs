@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace CowBoy
 {
-    public partial class ennemi
+    public partial class Ennemis
     {
-        
-        
-            //private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
-            private Image kangourou = Resources.kangou;
-
-            // De manière graphique
-            public void Render(BufferedGraphics drawingSpace)
-            {
-                drawingSpace.Graphics.DrawImage(kangourou, new Rectangle(_x, _y, 100, 100));
-
-               
-            }
 
 
-        
+        //private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
+        private Image kangourou = Resources.kangou;
+
+        // De manière graphique
+        public void Render(BufferedGraphics drawingSpace)
+        {
+            drawingSpace.Graphics.DrawImage(kangourou, new Rectangle(_x, _y, 100, 100));
+
+
+        }
+
+
+
     }
 
 }

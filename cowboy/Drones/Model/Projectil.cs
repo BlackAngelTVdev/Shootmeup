@@ -6,9 +6,9 @@ namespace CowBoy
 {
     public partial class Projectil
     {
-        private static int _nextId = 1; 
+        private static int _nextId = 1;
 
-        
+
         private double _vx;
         private double _vy;
         private int _id;

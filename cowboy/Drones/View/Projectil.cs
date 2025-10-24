@@ -11,7 +11,7 @@ namespace CowBoy
     {
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(Texture, new Rectangle(X, Y,100,100));
+            drawingSpace.Graphics.DrawImage(Texture, new Rectangle(X, Y, 100, 100));
         }
     }
 }

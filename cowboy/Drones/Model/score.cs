@@ -9,11 +9,11 @@ namespace CowBoy
 {
 
 
-    public partial class score
+    public partial class Score
     {
         private static int _score = 0;
 
-        public int Score { get => _score; set => _score = value; }
+        public int score { get => _score; set => _score = value; }
 
         public static void add()
         {

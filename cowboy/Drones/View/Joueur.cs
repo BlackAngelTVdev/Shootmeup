@@ -15,10 +15,10 @@ namespace CowBoy
         // De manière graphique
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(joueur, new Rectangle(X, _y, Direction,100));
-            drawingSpace.Graphics.DrawString($"{_vie}PV", TextHelpers.drawFont, TextHelpers.writingBrush, X + _direction /2, Y-10);
+            drawingSpace.Graphics.DrawImage(joueur, new Rectangle(X, _y, Direction, 100));
+            drawingSpace.Graphics.DrawString($"{_vie}PV", TextHelpers.drawFont, TextHelpers.writingBrush, X + _direction / 2, Y - 10);
         }
-        
+
 
     }
 }

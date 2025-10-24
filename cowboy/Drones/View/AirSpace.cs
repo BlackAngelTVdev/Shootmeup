@@ -13,16 +13,16 @@ namespace CowBoy
     public partial class Sand : Form
     {
 
-        
+
         public static readonly int WIDTH = 1920;        // Dimensions of the airspace
         public static readonly int HEIGHT = 1080;
         private Image _backgroundImage = Resources.bk;
         private Player _player;
-        
+
         private Point _mousePosition;
 
 
-        
+
 
 
 
@@ -30,10 +30,10 @@ namespace CowBoy
 
         private List<Obstacle> _fields;
         private List<Projectil> _pulls;
-        private List<ennemi> _military;
+        private List<Ennemis> _military;
 
         BufferedGraphicsContext currentContext;
-        BufferedGraphics airspace; 
+        BufferedGraphics airspace;
         private int playerShotsCount = 0;
 
 
@@ -41,9 +41,9 @@ namespace CowBoy
 
 
         // Initialisation de l'espace aérien avec un certain nombre de drones
-        public Sand(List<Obstacle> fields, List<Projectil> pulls, List<ennemi> military)
+        public Sand(List<Obstacle> fields, List<Projectil> pulls, List<Ennemis> military)
         {
-            
+
             InitializeComponent();
             this.MouseMove += AirSpace_MouseMove;  // Changer le nom pour éviter conflit
             this.MouseClick += AirSpace_MouseClick;
@@ -55,10 +55,10 @@ namespace CowBoy
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             this._fields = fields;
             this._pulls = pulls;
-            
+
             this._military = military;
             _player = new Player();
-            
+
 
         }
         private void AirSpace_MouseMove(object sender, MouseEventArgs e)
@@ -67,7 +67,7 @@ namespace CowBoy
         }
         private void AirSpace_MouseClick(object sender, MouseEventArgs e)
         {
-            
+
             if (e.Button == MouseButtons.Left)
             {
                 _player.tire(_pulls, _mousePosition);
@@ -93,7 +93,7 @@ namespace CowBoy
         private void Render()
         {
             Console.WriteLine(playerShotsCount);
-            score s = new score();
+            Score s = new Score();
             airspace.Graphics.DrawImage(_backgroundImage, new Rectangle(0, 0, Width, Height));
             _player.Render(airspace);
 
@@ -106,22 +106,22 @@ namespace CowBoy
             {
                 prjectil.Render(airspace);
             }
-            foreach (ennemi ennemi in _military)
+            foreach (Ennemis ennemi in _military)
             {
                 ennemi.Render(airspace);
             }
             s.Render(airspace);
 
             airspace.Render();
-            
+
 
         }
 
         // Calcul du nouvel état après que 'interval' millisecondes se sont écoulées
         private void Update(int interval)
         {
-            
-            score s = new score();
+
+            Score s = new Score();
 
             _player.addvie();
 
@@ -129,9 +129,9 @@ namespace CowBoy
             {
                 _fields.Add(new Obstacle(RandomHelper.NbrRandom(0, WIDTH - 70, false), RandomHelper.NbrRandom(300, 800, true)));
             }
-            if (ennemi.Nbennemi(_military) < 10)
+            if (Ennemis.Nbennemi(_military) < 10)
             {
-                _military.Add(new ennemi(RandomHelper.NbrRandom(0, WIDTH, false), 20, RandomHelper.NbrRandom(1, 2, true)));
+                _military.Add(new Ennemis(RandomHelper.NbrRandom(0, WIDTH, false), 20, RandomHelper.NbrRandom(1, 2, true)));
             }
 
             // Mise à jour des projectiles
@@ -141,14 +141,14 @@ namespace CowBoy
             }
 
             // Mise à jour des ennemis
-            foreach (ennemi ennemi in _military)
+            foreach (Ennemis ennemi in _military)
             {
                 ennemi.Update(_player.X, _player.Y, _pulls);
             }
 
             List<Projectil> projectilesToRemove = new List<Projectil>();
             List<Obstacle> obstaclesToRemove = new List<Obstacle>();
-            List<ennemi> ennemisToRemove = new List<ennemi>();
+            List<Ennemis> ennemisToRemove = new List<Ennemis>();
 
             // Vérification des collisions physiques entre ennemis et joueur
             Rectangle playerRect = _player.GetRectangle();
@@ -165,13 +165,13 @@ namespace CowBoy
 
             foreach (var projectile in _pulls)
             {
-                
+
 
                 Rectangle projRect = projectile.GetRectangle();
 
                 bool handled = false;
 
-                
+
                 foreach (var obstacle in _fields)
                 {
                     if (projRect.IntersectsWith(obstacle.GetRectangle()))
@@ -206,7 +206,7 @@ namespace CowBoy
 
                             if (enemy.Vie <= 0)
                             {
-                                score.add();
+                                Score.add();
                                 ennemisToRemove.Add(enemy);
                             }
                             handled = true;
@@ -216,17 +216,17 @@ namespace CowBoy
                 }
                 else
                 {
-                    
-                    
+
+
                     if (projRect.IntersectsWith(playerRect))
                     {
-                        _player.Vie-=5;
+                        _player.Vie -= 5;
                         projectilesToRemove.Add(projectile);
                         handled = true;
                     }
                 }
             }
-            
+
             // Suppression après boucle
             foreach (var p in projectilesToRemove)
                 _pulls.Remove(p);

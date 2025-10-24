@@ -10,12 +10,12 @@ namespace CowBoy
 {
     public partial class Obstacle
     {
-        
+
         private Image obstacle = Resources.kayou;
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(obstacle, new Rectangle(_x,_y, Width, Height));
-            
+            drawingSpace.Graphics.DrawImage(obstacle, new Rectangle(_x, _y, Width, Height));
+
         }
     }
 }

@@ -18,7 +18,7 @@ namespace CowBoy
             
             List<Obstacle> fields = new List<Obstacle>();
             List<Projectil> pulls = new List<Projectil> ();
-            List<ennemi> military = new List<ennemi> ();
+            List<Ennemis> military = new List<Ennemis> ();
 
 
 

@@ -4,7 +4,7 @@ using System;
 
 namespace CowBoy
 {
-    public partial class ennemi
+    public partial class Ennemis
     {
         private int _x;
         private int _y;
@@ -27,7 +27,7 @@ namespace CowBoy
         public EnemyState State { get => _state; set => _state = value; }
         public Point? TemporaryTarget { get => _temporaryTarget; set => _temporaryTarget = value; }
 
-        public ennemi(int startX, int startY, int speed)
+        public Ennemis(int startX, int startY, int speed)
         {
             this._x = startX;
             this._y = startY;
@@ -103,7 +103,7 @@ namespace CowBoy
         }
 
 
-        public static int Nbennemi(List<ennemi> military)
+        public static int Nbennemi(List<Ennemis> military)
         {
             int Nb = 0;
             foreach (var ennemi in military)
