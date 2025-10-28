@@ -94,6 +94,7 @@ namespace CowBoy
         {
             Console.WriteLine(playerShotsCount);
             Score s = new Score();
+            Affichage affichage = new Affichage();
             airspace.Graphics.DrawImage(_backgroundImage, new Rectangle(0, 0, Width, Height));
             _player.Render(airspace);
 
@@ -111,7 +112,14 @@ namespace CowBoy
                 ennemi.Render(airspace);
             }
             s.Render(airspace);
-
+            if (_player.Vie <= 0)
+            {
+                Affichage.Render(airspace, "GAME OVER !");
+            }
+            if (s.score >= 100)
+            {
+                Affichage.Render(airspace, "Tu as Gagné !");
+            }
             airspace.Render();
 
 
@@ -120,6 +128,7 @@ namespace CowBoy
         // Calcul du nouvel état après que 'interval' millisecondes se sont écoulées
         private void Update(int interval)
         {
+            
 
             Score s = new Score();
 
