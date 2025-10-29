@@ -1,5 +1,6 @@
-﻿using CowBoy.Helpers;
-
+﻿using System.Drawing;
+using System.Windows.Forms;
+using CowBoy.Helpers;
 
 namespace CowBoy
 {
@@ -9,23 +10,28 @@ namespace CowBoy
         {
             Graphics g = drawingSpace.Graphics;
 
+            Rectangle rect = new Rectangle(Sand.WIDTH - 160, 10, 150, 30);
 
-            Rectangle rect = new Rectangle(Sand.WIDTH - 160, 0, 150, 30);
-
-
-            using (SolidBrush semiTransparentBrush = new SolidBrush(Color.FromArgb(128, Color.Gray)))
+            using (SolidBrush backgroundBrush = new SolidBrush(Color.FromArgb(180, 50, 50, 50)))
             {
-
-                g.FillRectangle(semiTransparentBrush, rect);
+                g.FillRectangle(backgroundBrush, rect);
             }
 
+            using (Pen borderPen = new Pen(Color.Gold, 2))
+            {
+                g.DrawRectangle(borderPen, rect);
+            }
 
-            g.DrawString($"{score}", TextHelpers.drawFont, TextHelpers.writingBrush, rect.Left + 10, rect.Top + 5);
+            StringFormat format = new StringFormat()
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+            // Assurez-vous que la variable 'score' est accessible dans ce contexte.
+            string scoreText = $"SCORE: {score}";
+
+            g.DrawString(scoreText, TextHelpers.drawFont, TextHelpers.writingBrush, rect, format);
         }
-
-
-
-
     }
 }
-
