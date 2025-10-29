@@ -20,7 +20,7 @@ namespace CowBoy
         private Player _player;
 
         private Point _mousePosition;
-
+        private bool run = true;
 
 
 
@@ -58,7 +58,7 @@ namespace CowBoy
 
             this._military = military;
             _player = new Player();
-
+            Score s = new Score();
 
         }
         private void AirSpace_MouseMove(object sender, MouseEventArgs e)
@@ -92,45 +92,51 @@ namespace CowBoy
         // Affichage de la situation actuelle
         private void Render()
         {
-            Console.WriteLine(playerShotsCount);
-            Score s = new Score();
-            Affichage affichage = new Affichage();
-            airspace.Graphics.DrawImage(_backgroundImage, new Rectangle(0, 0, Width, Height));
-            _player.Render(airspace);
+            if (run)
+            {
 
 
-            foreach (Obstacle obstacle in _fields)
-            {
-                obstacle.Render(airspace);
-            }
-            foreach (Projectil prjectil in _pulls)
-            {
-                prjectil.Render(airspace);
-            }
-            foreach (Ennemis ennemi in _military)
-            {
-                ennemi.Render(airspace);
-            }
-            s.Render(airspace);
-            if (_player.Vie <= 0)
-            {
-                Affichage.Render(airspace, "GAME OVER !");
-            }
-            if (s.score >= 100)
-            {
-                Affichage.Render(airspace, "Tu as Gagné !");
-            }
-            airspace.Render();
+                Console.WriteLine(playerShotsCount);
+                Score s = new Score();
+                Affichage affichage = new Affichage();
+                airspace.Graphics.DrawImage(_backgroundImage, new Rectangle(0, 0, Width, Height));
+                _player.Render(airspace);
 
+
+                foreach (Obstacle obstacle in _fields)
+                {
+                    obstacle.Render(airspace);
+                }
+                foreach (Projectil prjectil in _pulls)
+                {
+                    prjectil.Render(airspace);
+                }
+                foreach (Ennemis ennemi in _military)
+                {
+                    ennemi.Render(airspace);
+                }
+                s.Render(airspace);
+                if (_player.Vie <= 0)
+                {
+                    Affichage.Render(airspace, "GAME OVER !");
+                    run = false;
+                }
+                if (s.score >= 100)
+                {
+                    Affichage.Render(airspace, "Tu as Gagné !");
+                    run = false;
+                }
+                airspace.Render();
+            }
 
         }
 
         // Calcul du nouvel état après que 'interval' millisecondes se sont écoulées
         private void Update(int interval)
         {
-            
 
-            Score s = new Score();
+
+
 
             _player.addvie();
 
@@ -252,8 +258,12 @@ namespace CowBoy
         // Méthode appelée à chaque frame
         private void NewFrame(object sender, EventArgs e)
         {
+
+
             this.Update(ticker.Interval);
             this.Render();
+
+
         }
 
         private void AirSpace_Load(object sender, EventArgs e)
