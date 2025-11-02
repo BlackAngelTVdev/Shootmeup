@@ -43,3 +43,17 @@ Les valeurs possibles du résultat sont: LA (Largement Acquis), A (Acquis), I (I
 | Ecologie (gitignore)       | A        |                                                                                                                                                                                                                         |
 | Comportement collectif     | A        | attention à ne pas perdre de temps dans trop de bavardage avec vos voisins                                                                                                                                              |
 | Comportement individuel    | LA       |                                                                                                                                                                                                                         |
+
+## Final
+
+livraison, impeccable
+
+très bonne introduction avec des objectifs pédagogiques et produits, présentés de manière claire et contextualisée. et tant pis si le nombre de mots demandés n'y est pas.
+
+l'analyse fonctionnelle n'est pas au point par contre. Vous avez rajouté du texte dans votre rapport alors qu'il suffisait de reprendre ou référencer les user Stories que vous aviez faites sur Github.
+
+Je ne peux m'empêcher de sourire quand je lis "pour finir, l'intelligence artificiel m'a été utiles pour corriger mon français chaotique" et que cette phrase contient deux grosses fautes d'orthographe!
+
+Le jeu est bon et complet.
+
+Je valide votre projet.
